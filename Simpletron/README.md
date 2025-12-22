@@ -13,3 +13,4 @@ Il modello è preso dal libro "Il linguaggio C" J.Deitel, M.Deitel (Pearson)
 Sono forniti due programmi:
 Max: restituisce il massimo tra due numeri
 Somma: resituisce la somma di due numeri
+[fopen.pdf](../../../../Documents/fopen.pdf)
