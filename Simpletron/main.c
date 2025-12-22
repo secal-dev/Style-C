@@ -140,6 +140,6 @@ int main(){
     dump(mem, accumulator, instruction_counter, instrucion_register); //visualizzo lo stato del calcolatore dopo l'esecuzione
 
     return 0;dad
-dfd
+dfddfqd
 ddawddad
 }
