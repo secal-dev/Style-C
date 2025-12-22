@@ -138,8 +138,8 @@ int main(){
 
     printf("\n");
     dump(mem, accumulator, instruction_counter, instrucion_register); //visualizzo lo stato del calcolatore dopo l'esecuzione
-kk
 
-aaaaaggggggsddd
-a   fffaassszf
-}ssssssdsdddddddffsdddsfsdfdddddadad
+    return 0;
+
+
+}
