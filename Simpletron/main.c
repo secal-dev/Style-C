@@ -1,6 +1,6 @@
 //SML -> Simpletron Machine Language
 
-
+//Sebastiano Calabrò, Dicembre 2025
 
 #include <stdio.h>
 
@@ -87,7 +87,7 @@ int execute(int* const mem, int *accumulator, int* instruction_counter, int* ins
             break;
         case DIVIDE:        //DIVIDE (32xx) divide all'accumulatore il valore della memoria(xx)
             *accumulator /= mem[operand];
-            printf("DIV eseguita, accumulatore: %d", *accumulator);
+            printf("DIV eseguita, accumulatore: %d\n", *accumulator);
             ++(*instruction_counter);
             break;
         case MULTIPLY:      //MULTIPLY (32xx) moltiplica all'accumulatore il valore della memoria(xx)
@@ -129,7 +129,7 @@ int main(){
     printf("Welcome to Simpletron \n\n");
 
 
-    load_program("somma", mem);
+    load_program("max", mem);
 
 
     //dump(mem, accumulator, instruction_counter, instrucion_register); //DUMP è una funzione che serve a visualizzare interamente lo stato del calcolatore
