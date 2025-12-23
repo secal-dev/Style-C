@@ -15,4 +15,4 @@ Max: restituisce il massimo tra due numeri
 Somma: resituisce la somma di due numeri
 
 Contenuti Correlati:
-Doc fopen-open
+Doc fopen-open-sscanf
