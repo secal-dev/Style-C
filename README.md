@@ -1,1 +1,1 @@
-#ESERCIZI DI STILE IN C
+Esercizi di stile in C
