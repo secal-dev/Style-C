@@ -124,7 +124,7 @@ int main(){
     int accumulator = 0;
     unsigned int instruction_counter = 0; //indirizzo di memoria della prossima istruzione da eseguire (%RIP)
     int instrucion_register = 0; //FETCHING = preleva il valore della cella istruction_counter e lo  mette in (%IR)
-    //queste 3 variabili sono il funzionamento base della cpu moderna: ad ogni clock aggiorna il valore dei tre
+    //queste 3 variabili sonao il funzionamento base della cpu moderna: ad ogni clock aggiorna il valore dei tre
 
     printf("Welcome to Simpletron \n\n");
 
