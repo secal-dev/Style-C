@@ -39,13 +39,24 @@ void load_program(const char* filename, int* const m) {
 
     if (fp == NULL) {printf("File mancante\n"); return;}
 
-    unsigned int smem = 0;
+    unsigned int smem = 0;      //smem = spazio di memoria corrente
 
     char buffer[MAX_LEN];
     while (fgets(buffer, MAX_LEN, fp) != NULL){       //fgets bufferizza riga per riga partendo dal pointer di fp (fino a \n-/0) e la mette in nella stringa buffer[]
         sscanf(buffer, "%d", &m[smem++]);          //sscanf legge la stringa buffer e cerca un intero ("%d") e lo mette nella posizione corrente di m[spaziodimemoria]
     }
     fclose(fp);
+}
+
+void input(int* a) {
+    printf("Inserire un numero\n");
+
+
+    while (scanf("%d", a) == 0) {
+        //questa condizione si verifica se a non assume valori interi
+        printf("Input non valido, riprovare\n");
+        while (getchar() != '\n');      //questa istruzione serve a svuotare il buffer di scanf, per consentirmi di ricevere input da tastiera
+    }
 }
 
 int execute(int* const mem, int *accumulator, int* instruction_counter, int* instruction_register) {
@@ -57,8 +68,7 @@ int execute(int* const mem, int *accumulator, int* instruction_counter, int* ins
 
     switch(opcode) {
         case READ:          //l'istruzione READ (10) prende una variabile in input(dal buffer di STDIO) e la scrive nella cella di memoria 20(mem[operando])
-            printf("Attesa di input\n");
-            scanf("%d",&mem[operand]);
+            input(&mem[operand]);
             ++(*instruction_counter);
             break;
         case WRITE:         //WRITE (11xx) accede ad una zona di memoria(xx) e lo scrive nel buffer di stream di I/O
@@ -123,13 +133,13 @@ int main(){
 
     int accumulator = 0;
     unsigned int instruction_counter = 0; //indirizzo di memoria della prossima istruzione da eseguire (%RIP)
-    int instrucion_register = 0; //FETCHING = preleva il valore della cella istruction_counter e lo  mette in (%IR)
+    int instrucion_register = 0; //FETCHING = preleva il valore della cella istruction_counter e lo mette in (%IR)
     //queste 3 variabili sono il funzionamento base della cpu moderna: ad ogni clock aggiorna il valore dei tre
 
     printf("Welcome to Simpletron \n\n");
 
 
-    load_program("max", mem);
+    load_program("somma", mem);
 
 
     //dump(mem, accumulator, instruction_counter, instrucion_register); //DUMP è una funzione che serve a visualizzare interamente lo stato del calcolatore
