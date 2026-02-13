@@ -57,7 +57,7 @@ void input(int* a) {
         printf("Input non valido, riprovare\n");
         while (getchar() != '\n');      //questa istruzione serve a svuotare il buffer di scanf, per consentirmi di ricevere input da tastiera
     }
-}
+}   
 
 int execute(int* const mem, int *accumulator, int* instruction_counter, int* instruction_register) {
 
@@ -67,7 +67,7 @@ int execute(int* const mem, int *accumulator, int* instruction_counter, int* ins
     unsigned int operand = mem[*instruction_counter] % 100; //l'operando è la destinazione dell'operazione dell'opcode
 
     switch(opcode) {
-        case READ:          //l'istruzione READ (10) prende una variabile in input(dal buffer di STDIO) e la scrive nella cella di memoria 20(mem[operando])
+        case READ:          //l'istruzione READ (10) prende una variabile in input(dal buffer di STDIO) e la scrive nella cella di memoria 10(mem[operando])
             input(&mem[operand]);
             ++(*instruction_counter);
             break;
@@ -86,21 +86,42 @@ int execute(int* const mem, int *accumulator, int* instruction_counter, int* ins
             ++(*instruction_counter);
             break;
         case ADD:           //ADD (30xx) somma all'accumulatore il valore della memoria(xx)
+            if (*accumulator + mem[operand] > 9999) {
+                printf("Overflow, operazione non eseguita\n");
+                return 0;
+            } //Controllo dell'overflow dell'accumulatore positivo
+            if (mem[operand] < 0) {
+                printf("Operando non supportato, operazione non eseguita\n");
+                return 0;
+            }//Controllo operando
+
             *accumulator += mem[operand];
             printf("ADD eseguita, accumulatore:%d\n", *accumulator);
             ++(*instruction_counter);
             break;
         case SUBTRACT:      //SUBTRACT (31xx) sottrae all'accumulatore il valore della memoria(xx)
+            if ( *accumulator - mem[operand] < -9999) {
+                printf("Overflow, operazione non eseguita\n");
+                return 0;
+            } //Controllo overflow dell'accumulatore negativo
             *accumulator -= mem[operand];
             printf("SUB eseguita, accumulatore: %d\n", *accumulator);
             ++(*instruction_counter);
             break;
         case DIVIDE:        //DIVIDE (32xx) divide all'accumulatore il valore della memoria(xx)
+            if (mem[operand] == 0) {
+                printf("Divisione per 0 non supportata");
+                return 0;
+            }
             *accumulator /= mem[operand];
             printf("DIV eseguita, accumulatore: %d\n", *accumulator);
             ++(*instruction_counter);
             break;
-        case MULTIPLY:      //MULTIPLY (32xx) moltiplica all'accumulatore il valore della memoria(xx)
+        case MULTIPLY:      //MULTIPLY (33xx) moltiplica all'accumulatore il valore della memoria(xx)
+            if (*accumulator * mem[operand] > 9999 || *accumulator * mem[operand] < -9999) {
+                printf("Overflow, operazione non eseguita\n");
+                return 0;
+            }
             *accumulator *= mem[operand];
             printf("MUL eseguita, accumulatore: %d\n", *accumulator);
             ++(*instruction_counter);
@@ -134,7 +155,7 @@ int main(){
     int accumulator = 0;
     unsigned int instruction_counter = 0; //indirizzo di memoria della prossima istruzione da eseguire (%RIP)
     int instrucion_register = 0; //FETCHING = preleva il valore della cella istruction_counter e lo mette in (%IR)
-    //queste 3 variabili sono il funzionamento base della cpu moderna: ad ogni clock aggiorna il valore dei tre
+    //queste 3 variabili sono il funzionamento base della cpu moderna: ad ogni clock viene aggiornato il valore dei tre
 
     printf("Welcome to Simpletron \n\n");
 
