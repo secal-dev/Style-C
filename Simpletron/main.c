@@ -43,7 +43,8 @@ void load_program(const char* filename, int* const m) {
 
     char buffer[MAX_LEN];
     while (fgets(buffer, MAX_LEN, fp) != NULL){       //fgets bufferizza riga per riga partendo dal pointer di fp (fino a \n-/0) e la mette in nella stringa buffer[]
-        sscanf(buffer, "%d", &m[smem++]);          //sscanf legge la stringa buffer e cerca un intero ("%d") e lo mette nella posizione corrente di m[spaziodimemoria]
+        sscanf(buffer, "%d", &m[smem++]);
+        //sscanf legge la stringa buffer e cerca un intero ("%d") e lo mette nella posizione corrente di m[spaziodimemoria]
     }
     fclose(fp);
 }
@@ -53,7 +54,7 @@ void input(int* a) {
 
 
     while (scanf("%d", a) == 0) {
-        //questa condizione si verifica se a non assume valori interi
+        //questa condizione si verifica se a non assume valori interi (size = 4 bit)
         printf("Input non valido, riprovare\n");
         while (getchar() != '\n');      //questa istruzione serve a svuotare il buffer di scanf, per consentirmi di ricevere input da tastiera
     }
