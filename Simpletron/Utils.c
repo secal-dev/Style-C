@@ -6,7 +6,7 @@
 
 //STRTOI -> STRING TO INT
 
-int atoi1 (char s[]) {
+int atoi1 (char s[]) { //ATOI -> ASCII to INT : converte da stringa a intero (stdlib)
     int n = 0;
 
     for (int i = 0;  s[i] >= '0' && s[i] <= '9'; i++) {
@@ -19,7 +19,7 @@ int atoi1 (char s[]) {
 
 }
 
-int* resize (int *a, int i) {
+int* resize (int *a, int i) { //aumenta dinamicamente la dimensione dell'array
     int *b = realloc(a, (i+1) * sizeof(int));
 
     return b;
@@ -27,11 +27,13 @@ int* resize (int *a, int i) {
 }
 
 int* strtoi(char *stringa, const char *separator) {
+    //String to array di integer
 
     int *a = NULL;
-    int i = 1;
+    int i = 0;
 
     char *tok = strtok(stringa, separator);
+    //Strtok = tokenizza la stringa con un separatore -> restituisce il puntatore alla prima occorrenza, memorizzandolo per le chiamate succesive
 
 
     while (tok != NULL) {
@@ -43,36 +45,27 @@ int* strtoi(char *stringa, const char *separator) {
 
         i++;
 
-        tok = strtok(NULL, separator);
+        tok = strtok(NULL, separator); //Chimata successiva solo con il separatore (puntatore alla stringa memorizzato nel buffer)
 
     }
 
-    a = resize(a, i);
-
-    for (int h = 1; h == i; h++) {
-        a[h] = a[h+1];
+    for (int h = 0; h < i; h++) {
+        printf("%d\n", a[h]);
     }
-    a[0] = i;
-
     return a;
-
 }
 
-void printarray_token(int * a) {
-    for (int i = 0; i < a[0]; i++) {
-        printf("%d\n", a[i]);
-    }
 
-}
+//FINE STRTOI
 
 
 int main(int argc, char *argv[]) {
-    /*
+
     char *stringa = argv[1];
+
     int *a = strtoi(stringa, ".");
 
-    printarray_token(a);
-*/
+
 
     return 0;
 }
